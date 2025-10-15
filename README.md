@@ -129,13 +129,13 @@ cd Poke-Cards
 2. Instale as dependências
 
 ```bash
-npm install
+yarn install
 ```
 
 3. Execute o projeto
 
 ```bash
-npm start
+yarn start
 ```
 
 4. Acesse no navegador
