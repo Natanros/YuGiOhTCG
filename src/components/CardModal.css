@@ -1,0 +1,307 @@
+.card-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10, 10, 20, 0.85);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInModal 0.4s ease-out;
+}
+
+@keyframes fadeInModal {
+  from { 
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to { 
+    opacity: 1;
+    backdrop-filter: blur(3px);
+  }
+}
+
+.card-modal {
+  background: linear-gradient(135deg, #18181f 80%, #2a1a2a 100%);
+  border-radius: 18px;
+  box-shadow: 
+    0 0 32px 8px #000a, 
+    0 0 0 4px #c9b037,
+    0 0 60px 10px rgba(201, 176, 55, 0.3);
+  padding: 32px;
+  max-width: 1100px;
+  width: 95%;
+  max-height: 90vh;
+  overflow: hidden;
+  color: #f3e9c7;
+  position: relative;
+  font-family: 'Cinzel', 'Crimson Text', 'Marcellus', serif;
+  
+  /* Animação de materialização da carta */
+  animation: cardMaterialize 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform-origin: center center;
+}
+
+/* Animação principal: carta se materializando */
+@keyframes cardMaterialize {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotateY(90deg) rotateX(45deg);
+    filter: brightness(3) blur(20px);
+  }
+  30% {
+    opacity: 0.5;
+    transform: scale(0.6) rotateY(45deg) rotateX(20deg);
+    filter: brightness(2) blur(10px);
+  }
+  60% {
+    opacity: 0.8;
+    transform: scale(0.95) rotateY(10deg) rotateX(5deg);
+    filter: brightness(1.3) blur(3px);
+  }
+  80% {
+    transform: scale(1.02) rotateY(-5deg) rotateX(-2deg);
+    filter: brightness(1.1) blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg) rotateX(0deg);
+    filter: brightness(1) blur(0px);
+  }
+}
+
+/* Partículas douradas que aparecem durante a materialização */
+.card-modal::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle at center,
+    rgba(201, 176, 55, 0.4) 0%,
+    rgba(201, 176, 55, 0.2) 20%,
+    transparent 50%
+  );
+  animation: particleBurst 0.8s ease-out forwards;
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 50%;
+}
+
+@keyframes particleBurst {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}
+
+.card-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  color: #c9b037;
+  cursor: pointer;
+  z-index: 1;
+  transition: all 0.2s;
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1;
+  user-select: none;
+}
+.card-modal-close:hover {
+  color: #f4d03f;
+  transform: scale(1.15);
+}
+
+/* Layout em duas colunas */
+.card-modal-content {
+  display: flex;
+  gap: 32px;
+  margin-top: 8px;
+  animation: contentFadeIn 0.6s ease-out 0.4s both;
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Coluna Esquerda */
+.card-modal-left {
+  flex: 0 0 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-modal-img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 16px #c9b037, 0 0 0 2px #222;
+  display: block;
+  animation: cardImageReveal 0.8s ease-out 0.5s both;
+  position: relative;
+}
+
+/* Animação de revelação da imagem da carta */
+@keyframes cardImageReveal {
+  0% {
+    opacity: 0;
+    filter: brightness(3) saturate(0);
+    transform: scale(0.8) rotateY(90deg);
+  }
+  50% {
+    filter: brightness(1.5) saturate(0.5);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1) saturate(1);
+    transform: scale(1) rotateY(0deg);
+  }
+}
+
+/* Brilho especial na imagem ao aparecer */
+.card-modal-img::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 176, 55, 0.6) 50%,
+    transparent 100%
+  );
+  animation: imageShine 1.2s ease-out 0.6s;
+}
+
+@keyframes imageShine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+.card-modal-basic-info {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #c9b03744;
+}
+
+.card-modal-basic-info h2 {
+  font-size: 1.4rem;
+  margin: 0 0 12px 0;
+  color: #c9b037;
+  text-shadow: 0 0 6px #000a;
+}
+
+.card-modal-basic-info p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Coluna Direita */
+.card-modal-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card-modal-description {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #c9b03744;
+}
+
+.card-modal-description h3 {
+  font-size: 1.3rem;
+  margin: 0 0 12px 0;
+  color: #c9b037;
+  text-shadow: 0 0 6px #000a;
+}
+
+.card-modal-description p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.card-modal-prices {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 16px 20px;
+  border-radius: 8px;
+  border: 1px solid #c9b03744;
+}
+.card-modal-prices h4 {
+  margin: 0 0 8px 0;
+  color: #c9b037;
+  font-size: 1.1rem;
+}
+.card-modal-prices ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.card-modal-prices li {
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.card-modal-link {
+  display: inline-block;
+  color: #c9b037;
+  background: #222;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 0 8px #c9b03744;
+  transition: all 0.2s;
+  align-self: flex-start;
+}
+.card-modal-link:hover {
+  background: #c9b037;
+  color: #222;
+  box-shadow: 0 0 16px #c9b037aa;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .card-modal-content {
+    flex-direction: column;
+  }
+  
+  .card-modal-left {
+    flex: 0 0 auto;
+    align-items: center;
+  }
+  
+  .card-modal-img {
+    max-width: 240px;
+  }
+}
