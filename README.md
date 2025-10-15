@@ -21,7 +21,7 @@ O **Yu-Gi-Oh! Card Explorer** é uma aplicação web que permite aos fãs de Yu-
 
 ## 🚀 Demo
 
-![Demo do Projeto](https://via.placeholder.com/800x400/18181f/c9b037?text=Yu-Gi-Oh+Card+Explorer)
+![Demo do Projeto](https://yu-gi-oh-tcg.vercel.app/)
 
 _Clique em qualquer carta para ver a animação de materialização!_
 
